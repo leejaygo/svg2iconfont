@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const app = new koa();
 
+
 app.use(koa_static('./dist'))
 
 router.get('/geticonfont', function (ctx, next){
