@@ -1,20 +1,12 @@
 pipeline: 
-    build: 
-        image: node:9.11.1
-        commands:
-            - npm config set registry https://registry.npm.taobao.org && npm install & node server.js
-        when:
-            event: [ push ]
-            branch: 
-                - master
     publish_push:
         image: plugins/docker
         registry: https://hub.docker.com
         username: ljzhou5
         password: "65678915"
         repo: https://hub.docker.com/r/ljzhou5/test
+        dockerfile: Dockerfile
         tags: ${DRONE_COMMIT}
-        insecure: true
         when:
             event: [ push, pull-request ]
             branch: 
