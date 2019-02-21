@@ -1,0 +1,28 @@
+pipeline: 
+    build: 
+        image: node:9.11.1
+        commands:
+            - npm config set registry https://registry.npm.taobao.org && npm install & node server.js
+        when:
+            event: [ push ]
+            branch: 
+                - master
+    publish_push:
+        image: plugins/docker
+        registry: https://hub.docker.com
+        username: ljzhou5
+        password: "65678915"
+        repo: https://hub.docker.com/r/ljzhou5/test
+        tags: ${DRONE_COMMIT}
+        insecure: true
+        when:
+            event: [ push, pull-request ]
+            branch: 
+                - master
+    deploy_prod:
+        script:
+            - docker rm -f svg2iconfont
+            - docker run -d -p 8097:8097 --name=svg2iconfont https://hub.docker.com/r/ljzhou5/test:${DRONE_TAG=latest}
+        when:
+            event: [ push ]
+
