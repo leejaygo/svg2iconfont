@@ -11,6 +11,7 @@ pipeline:
             event: [ push, pull-request ]
             branch: 
                 - master
+                
     deploy_prod:
         script:
             - docker rm -f svg2iconfont
