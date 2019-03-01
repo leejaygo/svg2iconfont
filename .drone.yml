@@ -15,6 +15,11 @@ pipeline:
             branch: 
                 - master
     deploy_prod:
+        image: appleboy/drone-ssh
+        host: 140.143.208.95
+        username: ubuntu
+        port: 80
+        secrets: [ ssh_key ]
         script:
             - docker rm -f svg2iconfont
             - docker run -d -p 8097:8097 --name=svg2iconfont https://hub.docker.com/r/ljzhou5/test:${DRONE_TAG=latest}
