@@ -7,7 +7,7 @@ pipeline:
         image: plugins/docker:17.05
         # registry: https://hub.docker.com
         username: ljzhou5
-        password: "65678915"
+        password: [ docker_password ]
         repo: ljzhou5/test
         tags: ${DRONE_COMMIT}
         dockerfile: Dockerfile
@@ -20,7 +20,7 @@ pipeline:
         host: 140.143.208.95
         username: ubuntu
         port: 22
-        secrets: [ ssh_key ]
+        password: [ tencent_password ]
         script:
             - docker rm -f svg2iconfont
             - docker run -d -p 8097:8097 --name=svg2iconfont ljzhou5/test:${DRONE_COMMIT}
