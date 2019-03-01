@@ -1,5 +1,5 @@
-FROM node:9.11.1
-WORKDIR /home/www/app
+FROM hub.c.163.com/library/node:latest
+WORKDIR /home/www/
 COPY package*.json ./
 RUN npm install
 COPY . .
