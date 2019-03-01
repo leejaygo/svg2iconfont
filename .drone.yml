@@ -6,8 +6,9 @@ pipeline:
     publish_push:
         image: plugins/docker:17.05
         # registry: https://hub.docker.com
-        username: ljzhou5
-        password: [ docker_password ]
+        # username: ljzhou5
+        # password: [ docker_password ]
+        secrets: [ docker_username, docker_password ]
         repo: ljzhou5/test
         tags: ${DRONE_COMMIT}
         dockerfile: Dockerfile
@@ -18,9 +19,9 @@ pipeline:
     deploy_prod:
         image: appleboy/drone-ssh:1.3
         host: 140.143.208.95
-        username: ubuntu
+        username: root
         port: 22
-        password: [ tencent_password ]
+        secrets: [ ssh_key ]
         script:
             - docker rm -f svg2iconfont
             - docker run -d -p 8097:8097 --name=svg2iconfont ljzhou5/test:${DRONE_COMMIT}
