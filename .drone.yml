@@ -8,7 +8,7 @@ pipeline:
         registry: https://hub.docker.com
         username: ljzhou5
         password: "65678915"
-        repo: ljzhou5/test
+        repo: https://hub.docker.com/ljzhou5/test
         tags: ${DRONE_COMMIT}
         dockerfile: Dockerfile
         when:

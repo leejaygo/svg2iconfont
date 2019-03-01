@@ -1,4 +1,4 @@
-FROM hub.c.163.com/library/node:latest
+FROM node:9
 WORKDIR /home/www/
 COPY package*.json ./
 RUN npm install
