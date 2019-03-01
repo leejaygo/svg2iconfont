@@ -5,10 +5,10 @@ pipeline:
     #         - npm config set registry https://registry.npm.taobao.org && npm install && node server.js
     publish_push:
         image: plugins/docker:17.05
-        registry: https://hub.docker.com
+        # registry: https://hub.docker.com
         username: ljzhou5
         password: "65678915"
-        repo: https://hub.docker.com/ljzhou5/test
+        repo: ljzhou5/test
         tags: ${DRONE_COMMIT}
         dockerfile: Dockerfile
         when:
@@ -23,7 +23,7 @@ pipeline:
         secrets: [ ssh_key ]
         script:
             - docker rm -f svg2iconfont
-            - docker run -d -p 8097:8097 --name=svg2iconfont https://hub.docker.com/ljzhou5/test:${DRONE_COMMIT}
+            - docker run -d -p 8097:8097 --name=svg2iconfont ljzhou5/test:${DRONE_COMMIT}
         when:
             event: [ push ]
 
